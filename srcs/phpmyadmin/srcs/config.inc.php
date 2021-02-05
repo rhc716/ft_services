@@ -33,7 +33,8 @@ $cfg['Servers'][$i]['host'] = 'mysql';
 $cfg['Servers'][$i]['port'] = '3306';
 $cfg['Servers'][$i]['compress'] = false;
 $cfg['Servers'][$i]['AllowNoPassword'] = false;
-
+#$cfg['ForceSSL'] = true;
+#$cfg['Servers'][$i]['ssl_verify'] = false;
 /**
  * phpMyAdmin configuration storage settings.
  */

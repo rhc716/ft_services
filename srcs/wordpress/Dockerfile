@@ -16,12 +16,6 @@ RUN wget https://wordpress.org/latest.tar.gz &&\
 	mv wordpress/ www/
 COPY srcs/wp-config.php www/wordpress/wp-config.php
 
-# SSL
-#RUN openssl req -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=KR/ST=Seoul/L=Seoul/O=42Seoul/OU=hroh/CN=localhost" -keyout test.key -out test.crt &&\
-#	mv test.crt etc/ssl/certs/ &&\
-#	mv test.key etc/ssl/private/ &&\
-#	chmod 600 etc/ssl/certs/test.crt etc/ssl/private/test.key
-
 # telegraf
 RUN mkdir -p /etc/telegraf
 COPY srcs/telegraf.conf /etc/telegraf/telegraf.conf
@@ -35,8 +29,5 @@ EXPOSE 5050
 RUN chown -R www:www /www &&\
 	chmod -R 755 /www &&\
 	chown -R www:www /var/lib/nginx
-
-#RUN rc-update add nginx default &&\
-#	rc-update add php-fpm7 default
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
