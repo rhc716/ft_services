@@ -11,7 +11,7 @@ spec:
     app: phpmyadmin
   ports:
     - port: 5000
-      targetPort: 80
+      targetPort: 5000
       protocol: TCP
       name: phpmyadmin
   type: LoadBalancer
@@ -42,7 +42,7 @@ spec:
       - image: phpmyadmin
         name: phpmyadmin
         ports:
-        - containerPort: 80
+        - containerPort: 5000
           name: phpmyadmin
         imagePullPolicy: Never
         volumeMounts:

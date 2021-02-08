@@ -61,6 +61,7 @@ spec:
         volumeMounts:
         - name: var-lib-ftp
           mountPath: /var/lib/ftp
+        command: ["/bin/bash","-c","/setup.sh; supervisord"]
       volumes:
       - name: var-lib-ftp
         persistentVolumeClaim:

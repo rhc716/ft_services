@@ -2,7 +2,7 @@
 # https://kind.sigs.k8s.io/docs/user/quick-start/#installation
 
 # kind로 클러스터 삭제
-# kind delete cluster --name ftservice
+kind delete cluster --name ftservice
 
 # kind로 클러스터 생성
 kind create cluster --name ftservice
@@ -72,12 +72,12 @@ kind load docker-image mysql --name ftservice
 kubectl apply -f ./srcs/mysql/mysql.yaml
 
 #### PHPMYADMIN ####
-docker build ./srcs/phpmyadmin -t mysql
+docker build ./srcs/phpmyadmin -t phpmyadmin
 kind load docker-image phpmyadmin --name ftservice
 kubectl apply -f ./srcs/phpmyadmin/phpmyadmin.yaml
 
 #### WORDPRESS ####
-docker build ./srcs/wordpress -t mysql
+docker build ./srcs/wordpress -t wordpress
 kind load docker-image wordpress --name ftservice
 kubectl apply -f ./srcs/wordpress/wordpress.yaml
 

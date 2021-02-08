@@ -14,8 +14,9 @@ RUN echo "testfile" > /var/lib/ftp/testfile
 # supervisord
 COPY srcs/supervisord.conf /etc/supervisord.conf
 
-RUN chmod 777 /var/lib/ftp
+COPY srcs/setup.sh .
+RUN chmod 777 /setup.sh
 
 EXPOSE 21 30000
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+#CMD 는 yaml 파일의 command로 대체, PV에 권한 부여
