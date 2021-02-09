@@ -3,6 +3,9 @@ FROM alpine:latest
 RUN	apk update && apk add --no-cache openrc bash grafana telegraf supervisor\
 	&& apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main libc6-compat
 
+
+# grafana
+COPY srcs/dashboards /dashboards
 COPY srcs/datasources.yaml /usr/share/grafana/conf/provisioning/datasources/
 COPY srcs/dashboard.yaml /usr/share/grafana/conf/provisioning/dashboards/
 
