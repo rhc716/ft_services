@@ -49,3 +49,9 @@ spec:
           - name: share
             mountPath: /www
         command: ["/bin/bash","-c","/setup.sh; supervisord"]
+        livenessProbe:
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          timeoutSeconds: 5
+          tcpSocket:
+            port: 5000

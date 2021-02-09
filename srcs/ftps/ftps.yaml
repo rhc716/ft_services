@@ -47,6 +47,10 @@ spec:
       labels:
         app: ftps
     spec:
+      volumes:
+      - name: var-lib-ftp
+        persistentVolumeClaim:
+          claimName: ftps-pvc
       containers:
       - name: ftps
         image: ftps
@@ -62,7 +66,9 @@ spec:
         - name: var-lib-ftp
           mountPath: /var/lib/ftp
         command: ["/bin/bash","-c","/setup.sh; supervisord"]
-      volumes:
-      - name: var-lib-ftp
-        persistentVolumeClaim:
-          claimName: ftps-pvc
+        livenessProbe:
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          timeoutSeconds: 5
+          tcpSocket:
+            port: 21

@@ -77,3 +77,5 @@ spec:
             timeoutSeconds: 5
             tcpSocket:
               port: 22
+              port: 80
+              port: 443

@@ -35,3 +35,9 @@ spec:
         imagePullPolicy: Never
         securityContext:
           privileged: true
+        livenessProbe:
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          timeoutSeconds: 5
+          tcpSocket:
+            port: 3000

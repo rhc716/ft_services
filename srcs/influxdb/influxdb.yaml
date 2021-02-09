@@ -53,6 +53,12 @@ spec:
         volumeMounts:
         - name: var-lib-influxdb
           mountPath: /var/lib/influxdb
+        livenessProbe:
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          timeoutSeconds: 5
+          tcpSocket:
+            port: 8086
       volumes:
       - name: var-lib-influxdb
         persistentVolumeClaim:

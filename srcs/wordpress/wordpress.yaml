@@ -41,3 +41,9 @@ spec:
         - containerPort: 5050
           name: wordpress
         imagePullPolicy: Never
+        livenessProbe:
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          timeoutSeconds: 5
+          tcpSocket:
+            port: 5050

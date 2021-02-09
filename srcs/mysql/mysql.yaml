@@ -43,6 +43,10 @@ spec:
       labels:
         app: mysql
     spec:
+      volumes:
+      - name: var-lib-mysql
+        persistentVolumeClaim:
+          claimName: mysql-pvc
       containers:
       - image: mysql
         name: mysql
@@ -57,7 +61,9 @@ spec:
         args:
           - /usr/bin/mysql_install_db --user=mysql --datadir="/var/lib/mysql";
             supervisord;
-      volumes:
-      - name: var-lib-mysql
-        persistentVolumeClaim:
-          claimName: mysql-pvc
+        livenessProbe:
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          timeoutSeconds: 5
+          tcpSocket:
+            port: 3306
