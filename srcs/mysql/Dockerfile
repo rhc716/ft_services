@@ -11,7 +11,9 @@ COPY srcs/supervisord.conf /etc/supervisord.conf
 
 # mysql
 COPY srcs/mysql.sh .
-RUN chmod 777 /mysql.sh
+COPY srcs/wordpress.sql .
+RUN chmod 777 /mysql.sh &&\
+	chmod 777 /wordpress.sql
 RUN sed -i 's/skip-networking/#skip-networking/g' /etc/my.cnf.d/mariadb-server.cnf
 
 EXPOSE 3306
