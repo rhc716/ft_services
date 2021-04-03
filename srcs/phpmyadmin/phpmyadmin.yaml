@@ -34,10 +34,6 @@ spec:
       labels:
         app: phpmyadmin
     spec:
-      volumes:
-        - name: share
-          persistentVolumeClaim:
-            claimName: share-pvc
       containers:
       - image: phpmyadmin
         name: phpmyadmin
@@ -45,10 +41,6 @@ spec:
         - containerPort: 5000
           name: phpmyadmin
         imagePullPolicy: Never
-        volumeMounts:
-          - name: share
-            mountPath: /www
-        command: ["/bin/bash","-c","/setup.sh; supervisord"]
         livenessProbe:
           initialDelaySeconds: 20
           periodSeconds: 10

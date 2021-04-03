@@ -24,17 +24,6 @@ spec:
       protocol: TCP
       targetPort: 22
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: share-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -52,18 +41,10 @@ spec:
       labels:
         app: nginx
     spec:
-      volumes:
-        - name: share
-          persistentVolumeClaim:
-            claimName: share-pvc
       containers:
         - name: nginx
           image: nginx
           imagePullPolicy: Never
-          volumeMounts:
-            - name: share
-              mountPath: /www
-          command: ["/bin/bash","-c","/setup.sh; supervisord"]
           ports:
             - containerPort: 80
               name: http

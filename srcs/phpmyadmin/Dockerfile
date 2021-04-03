@@ -24,10 +24,9 @@ COPY srcs/php.ini /etc/php7/php.ini
 
 EXPOSE 5000
 
-COPY srcs/setup.sh .
-RUN chmod 777 /setup.sh &&\
-	chown -R www:www /var/lib/nginx &&\
-	chown -R www:www /usr/share/webapps/phpmyadmin &&\
-	chmod -R 755 /usr/share/webapps/phpmyadmin
+RUN mkdir www &&\
+	mv usr/share/webapps/phpmyadmin /www &&\
+	chown -R www:www /var/lib/nginx www &&\
+	chmod -R 755 www
 
-#CMD 는 yaml 파일의 command로 대체, PV에 데이터 이동
+CMD /usr/bin/supervisord -c /etc/supervisord.conf;

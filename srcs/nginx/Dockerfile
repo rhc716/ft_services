@@ -27,9 +27,10 @@ RUN openssl req -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=KR/ST=Seoul/L=
 EXPOSE 80 443 22
 
 COPY srcs/index.html .
-COPY srcs/setup.sh .
-RUN chmod 777 /setup.sh &&\
-	chmod 777 /index.html &&\
-	chown -R www:www /var/lib/nginx
 
-#CMD 는 yaml 파일의 command로 대체, PV에 데이터 이동
+RUN mkdir www &&\
+	mv ./index.html /www/index.html &&\
+	chown -R www:www /var/lib/nginx &&\
+	chmod -R 755 /www
+
+CMD /usr/bin/supervisord -c /etc/supervisord.conf;
